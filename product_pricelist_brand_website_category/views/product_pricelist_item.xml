@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="product_pricelist_item_form_view" model="ir.ui.view">
+            <field name="name">product.pricelist.item.form</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+            <field name="model">product.pricelist.item</field>
+            <field name="arch" type="xml">
+                <field name="categ_id" position="after">
+                    <field name="brand_id" attrs="{'invisible':[('applied_on', '!=', '22_product_brand')], 'required':[('applied_on', '=', '22_product_brand')]}"/>
+                </field>
+            </field>
+        </record>
+        
+	    <record id="product_pricelist_item_form_extended_view" model="ir.ui.view">
+	        <field name="model">product.pricelist.item</field>
+	        <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="//field[@name='categ_id']" position="after">
+	                <field name="product_public_categ_id" attrs="{'invisible':[('applied_on', '!=', '21_product_public_categ')], 'required':[('applied_on', '=', '21_product_public_categ')]}"/>
+	            </xpath>
+	        </field>
+	    </record>
+	
+	    <record id="product_pricelist_item_tree_extended_view" model="ir.ui.view">
+	        <field name="model">product.pricelist.item</field>
+	        <field name="inherit_id" ref="product.product_pricelist_item_tree_view"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="//field[@name='categ_id']" position="replace">
+	                <field name="product_public_categ_id"/>
+	                <field name="brand_id"/>	                
+	            </xpath>
+	        </field>
+	    </record>
+    
+    </data>
+    
+    
+    
+</openerp>
